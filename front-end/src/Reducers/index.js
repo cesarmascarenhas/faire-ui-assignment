@@ -45,7 +45,7 @@ export const products = (products=[],actions) => {
     
 }
 
-export const pagination = (page = {page:1,total:0,category:'New'}, actions) => {
+export const pagination = (page = {page:1,total:0,category:'Top Sellers',subcategory:''}, actions) => {
 
     switch(actions.type){
         case CONSTANTS.PAGINATE:
