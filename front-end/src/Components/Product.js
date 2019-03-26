@@ -6,8 +6,16 @@ import {Link} from 'react-router-dom';
 
 
 export default class Product extends Component {
-    
+  
+
     render() {
+
+    if(this.props.product.fix){
+        return (
+          <div className="brand-props fix-row"></div>
+        )
+    }
+    
     const {
       name,
       wholesale_price_cents,

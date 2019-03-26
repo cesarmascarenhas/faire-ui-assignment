@@ -13,6 +13,7 @@ a{
   color:rgb(42, 42, 42);
 }
 .header{
+  position: relative;
   display: flex;
   align-items: center;
   min-height: 40px;
@@ -25,40 +26,85 @@ a{
   width:auto;
   margin-left: 2em;
 }
+.breadcrumbs{
+  position: absolute;
+  font-size: 12px;
+  font-weight: 500;
+  bottom:10px;
+  left: 32px;
+  color:#000;
+  opacity: .5;
+}
+.breadcrumbs img{
+  width:16px;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+.breadcrumbs span{
+  display: inline-block;
+  vertical-align: middle;
+}
 .categories{
   position: relative;
-  z-index: 99;
-  border-bottom:solid 1px #a7a7a7;
+  border-bottom:solid 3px #eaeaea;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 50px;
+  line-height: 50px;
 }
-.categories ul, .brand-badges ul{
+.categories-inner{
+  width: calc(100% - 120px);
+  margin-left: 50px;
+  margin-right: 50px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100%;
+  padding-bottom: 20px;
+  padding-right: 20px;
+}
+.categories ul, .brand-badges ul, .sub-categories ul,.pagination ul{
   list-style: none;
 }
 .categories ul{
   padding: 0 1em 0 1em;
-  display: flex;
-  flex-flow: row wrap;
-  align-content: space-around;
-  justify-content: space-between;
   font-size: 14px;
   font-weight: 350;
   background-color: #fff;
   margin: 0;
   height: 60px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 }
 .categories ul li{
-  position: relative;
+  display: inline-block;
+  padding-right: 10px;
+  padding-left: 10px;
+  text-align: center;
   color: #727272;
+}
+.categories ul li a, .categories ul li img{
+  display: inline-block;
+  vertical-align: middle;
 }
 .categories span{
   display: inline-block;
   width: 12px;
   text-align: center;
-  border:solid 1px #a7a7a7;
+  border:solid 1px #eaeaea;
   font-size: 12px;
 }
 .sub-categories{
   padding: 1em 0 2em 0;
-  border-top:solid 1px #a7a7a7;
+  border-bottom:solid 3px #eaeaea;
+  margin-bottom: 1em;
+}
+.sub-categories ul{
+  display: flex;
+  flex-flow: row wrap;
 }
 .sub-categories-container{
   display: flex;
@@ -67,6 +113,19 @@ a{
   opacity: 0;
   animation: opensub 800ms;
   animation-fill-mode: forwards;
+}
+
+.cat-nav{
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  top: 50%;
+  left: 10px;
+  transform:translateY(calc(-50% + 4px));
+  display: none;
+}
+.cat-nav.next {
+  left:calc(100% - 30px);
 }
 @keyframes opensub {
   0%{
@@ -99,7 +158,7 @@ a{
 }
 .brands-container{
   display:flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-flow: row wrap;
 }
 /*.brands-container::after{
@@ -118,7 +177,9 @@ a{
   height: 400px;
   width: 300px;
 }
-
+.fix-row{
+  height: 0;
+}
 .brand-props img{
   width: auto;
   height: 100%;
@@ -171,7 +232,7 @@ a{
   background-color: rgba(255,255,255,.9);
   transition: all 200ms ease-out;
 }
-.brand-props:hover .brand-badges ul{
+.brand-props .brand-img:hover .brand-badges ul{
   opacity: 1;
 }
 .brand-props:hover .brand-img>a>img{
@@ -243,6 +304,7 @@ a{
   list-style: none;
   display: flex;
   justify-content: center;
+  padding: 0;
   
 }
 .brand-profile-badges li{
@@ -294,11 +356,83 @@ button{
   margin-left: 1em;
 }
 .header-profile img{
-  width: 35px;
+  width: 30px;
   height: auto;
   margin: 0;
-  margin-right: 5px;
+  margin-right: 0px;
   border-radius:100%;
   background-color: #fff;
   padding: 2px;
+}
+.hide{
+  display:none!important;
+}
+.pagination{
+  margin-bottom: 3em;
+}
+.pagination ul{
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+.pagination li{
+  border:solid 2px #eaeaea;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  color: #000;
+  text-align: center;
+  margin:6px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+.pagination li.active{
+  background-color: #000;
+  color:#fff;
+}
+
+.loading{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255,.75);
+}
+.loading img{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.loading img:first-of-type{
+  animation: loading infinite 1000ms linear;
+}
+.loading img:last-of-type{
+  width: 20px;
+  height: 20px;
+}
+@keyframes loading{
+  0%{
+    transform: translate(-50%,-50%) rotate(0deg);
+  }
+  50%{
+    transform: translate(-50%,-50%) rotate(180deg);
+  }
+  100%{
+    transform: translate(-50%,-50%) rotate(360deg);
+  }
+}
+
+@media(max-width:1300px){
+  .cat-nav.next{
+    display: initial;
+  }
+  .pagination li{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+  }
 }

@@ -10,22 +10,30 @@ import {Link} from 'react-router-dom';
 export default class Brand extends Component {
     
     render() {
+    
+    if(this.props.brand.fix){
+      return (
+        <div className="brand-props fix-row"></div>
+      )
+    }
+
     const {
       name,
       minimum_order_amount_cents,
-      images,
       eco_friendly,
       hand_made,
       charitable,
       categories,
-      token
+      token,
+      squared_image
     } = this.props.brand;
     const min = minimum_order_amount_cents/100;
+
     return (
       <div className="brand-props">        
         <div className="brand-img">
             <Link to={`/brand/${token}`}>
-              <img src={images[1] ? images[1].url : no_image} alt=""/>
+              <img src={squared_image ? squared_image.url : no_image} alt=""/>
             </Link>
             <div className="brand-badges">
               <ul>

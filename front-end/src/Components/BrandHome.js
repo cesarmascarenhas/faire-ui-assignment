@@ -29,6 +29,7 @@ export class BrandHome extends Component {
     return (
       <div>
         <Header />
+        
         { brand ? 
             <div className="brand">
                 <div className="brand-cover" style={{backgroundImage:`url(${brand.images[0].url})`,backgroundSize:'cover'}}>
@@ -44,8 +45,7 @@ export class BrandHome extends Component {
                         {brand.hand_made    ?  <li><img src={charitable_badge} alt=""/><span>Charitable</span></li> : ''}
                         {brand.charitable   ?  <li><img src={handmade_badge} alt=""/><span>Hand Made</span></li> : ''}
                             <li><img src={location_badge} alt="location"/><span>{brand.based_in_city}</span></li>
-                            <li><img src={creation_year_badge} alt="location"/><span>{brand.creation_year}</span></li>
-                            
+                            <li><img src={creation_year_badge} alt="location"/><span>{brand.creation_year}</span></li>                            
                         </ul>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ export const fetchInitApp = async () => {
     return Promise.all(
         [
             fetchCategories(),
-            //fetchSearch({category:'New'})
+            fetchSearch({category:'New'})
         ]
     )
 }

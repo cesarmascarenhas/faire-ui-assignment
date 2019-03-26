@@ -5,10 +5,10 @@ import * as API from './Api'
 import * as ACTIONS from './Actions'
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import Home from './Components/Home';
 import Category from './Components/Category';
 import BrandHome from './Components/BrandHome';
 class App extends Component {
+
   componentDidMount(){   
       
         API.fetchInitApp()
@@ -26,8 +26,8 @@ class App extends Component {
         <div className="app">
           <Route>
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/category/:cat" render={(props) => <Category {...props}/> } />
+              <Route exact path="/" component={Category} />
+              <Route path="/category/:cat?/:page?" render={(props) => <Category {...props}/> } />
               <Route exact path="/brand/:token" render={(props) => <BrandHome {...props}/> } />
             </Switch>
           </Route>

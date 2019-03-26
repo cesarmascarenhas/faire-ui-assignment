@@ -3,6 +3,15 @@ export const SEARCHING = 'SEARCHING';
 export const ADD_PRODUCTS = 'ADD_PRODUCTS';
 export const ADD_BRANDS = 'ADD_BRANDS';
 export const CATEGORY_AT = 'CATEGORY_AT';
+export const PAGINATE = 'PAGINATE';
+export const LOADING = 'LOADING'
+
+export const loading = (loading) => {
+    return {
+        type:LOADING,
+        loading
+    }
+}
 
 export const fetchCategories = (categories) => {
     return {
@@ -37,5 +46,13 @@ export const setCategory = (category) => {
     return {
         type:CATEGORY_AT,
         category
+    }
+}
+
+export const setPagination = (page,total) => {
+    return{
+        type:PAGINATE,
+        page, 
+        total
     }
 }

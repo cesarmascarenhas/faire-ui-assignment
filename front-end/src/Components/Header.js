@@ -5,12 +5,15 @@ import basket from '../Assets/basket.svg'
 import user from '../Assets/user.svg'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
+import location_badge from '../Assets/location.svg';
+
 export  class Header extends Component {
   render() {
     return (
       <div>
         <div className="header">
            <Link to="/" style={{flexBasis:'100%'}}><img src={logo} alt="Faire"></img></Link>
+           <div className='breadcrumbs'><img src={location_badge} alt="" /><span>{this.props.category}</span></div>
            <div className="header-profile">
                 <ul>
                     <li>
@@ -22,7 +25,7 @@ export  class Header extends Component {
                 </ul>
            </div>
         </div>
-        <Categories categories={this.props.categories} />
+        <Categories categories={this.props.categories} />        
       </div>
     )
   }

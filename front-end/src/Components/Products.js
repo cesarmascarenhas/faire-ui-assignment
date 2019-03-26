@@ -1,13 +1,17 @@
 import Product from './Product'
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
+import * as Helpers from '../Helpers';
 
 export class Products extends Component {
+    
+  
+
   render() {
     return (
       <div className="brands-container">
             {
-                this.props.products.map(product=><Product key={product.name} product={product}/>)
+                Helpers.fillRow(this.props.products).map((product,index)=><Product key={product.name+index} product={product}/>)
             }
       </div>
     )
