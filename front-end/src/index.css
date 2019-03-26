@@ -427,6 +427,10 @@ button{
 }
 
 @media(max-width:1300px){
+  .cat-nav{
+    animation: opensub 400ms;
+    animation-fill-mode: forwards;
+  }
   .cat-nav.next{
     display: initial;
   }
@@ -445,5 +449,8 @@ button{
   .brand-profile-badges{
     width: 80%;
     margin: auto;
+  }
+  .brand-cover{
+    background-position-x: 75%;
   }
 }
