@@ -28,7 +28,7 @@ export  class Pagination extends Component {
       <div className="pagination">
         <ul>
             {   page-2 >= 1 ? 
-                    <Link key={total-1}  to={`/category/${this.props.category}/1`} >
+                    <Link key={total-1}  to={`/category/${this.props.pagination.category}/1`} >
                         <li className="pagination-range">
                             <span>First</span>
                         </li>

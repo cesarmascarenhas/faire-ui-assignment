@@ -2,7 +2,6 @@ export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const SEARCHING = 'SEARCHING';
 export const ADD_PRODUCTS = 'ADD_PRODUCTS';
 export const ADD_BRANDS = 'ADD_BRANDS';
-export const CATEGORY_AT = 'CATEGORY_AT';
 export const PAGINATE = 'PAGINATE';
 export const LOADING = 'LOADING'
 
@@ -42,17 +41,11 @@ export const fetchBrands = (brands) => {
     }
 }
 
-export const setCategory = (category) => {
-    return {
-        type:CATEGORY_AT,
-        category
-    }
-}
-
-export const setPagination = (page,total) => {
+export const setPagination = (page,total,category) => {
     return{
         type:PAGINATE,
         page, 
-        total
+        total,
+        category
     }
 }

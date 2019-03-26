@@ -45,24 +45,14 @@ export const products = (products=[],actions) => {
     
 }
 
-export const category = (category='',actions) => {
-
-    switch(actions.type){
-        case CONSTANTS.CATEGORY_AT:
-            return actions.category
-        default:
-        return category;
-    }
-    
-}
-
-export const pagination = (page = {page:1,total:0}, actions) => {
+export const pagination = (page = {page:1,total:0,category:'New'}, actions) => {
 
     switch(actions.type){
         case CONSTANTS.PAGINATE:
             return {
                 page:actions.page,
-                total:actions.total
+                total:actions.total,
+                category:actions.category
             };
         default:
         return page;
@@ -86,7 +76,6 @@ export default combineReducers({
     search,
     brands,
     products,
-    category,
     pagination,
     loading
 })

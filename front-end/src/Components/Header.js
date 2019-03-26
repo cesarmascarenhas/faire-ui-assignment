@@ -13,7 +13,7 @@ export  class Header extends Component {
       <div>
         <div className="header">
            <Link to="/" style={{flexBasis:'100%'}}><img src={logo} alt="Faire"></img></Link>
-           <div className='breadcrumbs'><img src={location_badge} alt="" /><span>{this.props.category}</span></div>
+           <div className='breadcrumbs'><img src={location_badge} alt="" /><span>{this.props.pagination.category}</span></div>
            <div className="header-profile">
                 <ul>
                     <li>

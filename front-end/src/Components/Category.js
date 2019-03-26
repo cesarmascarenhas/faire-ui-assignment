@@ -10,6 +10,10 @@ import faire_img from '../Assets/faire_f.png';
 
 export class Category extends Component {
 
+    state={
+      changed:false
+    }
+   
     getCategoryData(category,page){
 
         window.scrollTo({
@@ -30,19 +34,18 @@ export class Category extends Component {
             
             let page  = data.pagination_data.page_number;
             let total = data.pagination_data.page_count;
-            return new Promise((resolve, reject) =>{
+            return new Promise(async (resolve, reject) =>{
 
-              this.props.dispatch(ACTIONS.setPagination(page,total));
-              this.props.dispatch(ACTIONS.setCategory(category));
-              this.props.dispatch(ACTIONS.fetchBrands(data.brands)); 
-              
-              resolve()
+              await this.props.dispatch(ACTIONS.setPagination(page,total,category));
+              //await this.props.dispatch(ACTIONS.setCategory(category));              
+              await this.props.dispatch(ACTIONS.fetchBrands(data.brands)); 
+              resolve(data);
             
             })
             
             
           }  
-        ).then((data) => {
+        ).then((data) => {          
           this.props.dispatch(ACTIONS.loading(false));
         })
     }
@@ -51,17 +54,17 @@ export class Category extends Component {
       
       const category  = this.props.match.params.cat  ? this.props.match.params.cat : 'New'
       const page      = this.props.match.params.page ? parseInt(this.props.match.params.page) : 1 
-      console.log('m',page !== this.props.pagination.page, page,this.props.pagination.page)      
+  
       this.getCategoryData(category,page);
          
     }
-    
+
     componentDidUpdate(){
         // If no category is received, 'New' is set.
         const category  = this.props.match.params.cat  ? this.props.match.params.cat : 'New'
         const page      = this.props.match.params.page ? parseInt(this.props.match.params.page) : 1
         
-        if(category !== this.props.category || page !== this.props.pagination.page){            
+        if((category !== this.props.pagination.category || page !== this.props.pagination.page) && !this.props.loading){      
             this.getCategoryData(category,page);
         }
     }
@@ -80,7 +83,7 @@ export class Category extends Component {
               : 
               <div>
                 {this.props.brands.length > 0 ? <Brands /> : ''}
-                <Pagination page={this.props.match.params.page} /> 
+                <Pagination category={this.props.pagination.category} page={this.props.match.params.page} /> 
               </div>
             }
              
