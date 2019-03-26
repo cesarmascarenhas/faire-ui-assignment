@@ -5,6 +5,15 @@ import {Link} from 'react-router-dom'
 export  class Pagination extends Component {
 
   setPagination(page,total){
+    
+    if(total <= 3){
+        let cut_pagination = [];
+        let index = 1;
+        while(cut_pagination.length < total){
+            cut_pagination.push(index++);
+        }
+        return cut_pagination;
+    }
    
     let pagination = [];
 
