@@ -27,8 +27,8 @@ class App extends Component {
           <Route>
             <Switch>
               <Route exact path="/" component={Category} />
+              <Route exact path="/category/:cat/:page/brand/:token" render={(props) => <BrandHome {...props}/> } />
               <Route path="/category/:cat?/:page?" render={(props) => <Category {...props}/> } />
-              <Route exact path="/brand/:token" render={(props) => <BrandHome {...props}/> } />
             </Switch>
           </Route>
         </div>

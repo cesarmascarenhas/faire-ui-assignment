@@ -4,10 +4,11 @@ import charitable_badge from '../Assets/charity.svg';
 import handmade_badge from '../Assets/handmade.svg';
 import no_image from '../Assets/noimage.png';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 
 
-export default class Brand extends Component {
+export class Brand extends Component {
     
     render() {
     
@@ -32,7 +33,7 @@ export default class Brand extends Component {
     return (
       <div className="brand-props">        
         <div className="brand-img">
-            <Link to={`/brand/${token}`}>
+            <Link to={`/category/${this.props.pagination.category}/${this.props.pagination.page}/brand/${token}`}>
               <img src={squared_image ? squared_image.url : no_image} alt=""/>
             </Link>
             <div className="brand-badges">
@@ -55,3 +56,8 @@ export default class Brand extends Component {
     )
   }
 }
+function mapStateToProps(state){
+  return state;
+}
+
+export default connect(mapStateToProps)(Brand);

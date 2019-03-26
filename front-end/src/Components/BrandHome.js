@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import Header from './Header';
 import Products from './Products'
-import * as Actions from '../Actions'
+import * as ACTIONS from '../Actions'
 import * as API from '../Api'
 import eco_friendly_badge from '../Assets/eco.svg';
 import charitable_badge from '../Assets/charity.svg';
@@ -18,10 +18,36 @@ export class BrandHome extends Component {
   }
 
   componentDidMount(){
-      API.fetchProducts(this.props.match.params.token)
-      .then((data) => {
-          this.props.dispatch(Actions.fetchProducts(data));
-      })
+
+    let category = this.props.match.params.cat;
+    let page_number =  this.props.match.params.page;
+    this.props.dispatch(ACTIONS.loading(true));
+    
+    API.fetchSearch({
+      category,
+      pagination_data:{
+          page_number
+      }
+    })
+    .then( 
+      
+      (data) => {
+        
+        let page  = data.pagination_data.page_number;
+        let total = data.pagination_data.page_count;
+        return new Promise(async (resolve, reject) =>{
+
+          await this.props.dispatch(ACTIONS.setPagination(page,total,category));        
+          await this.props.dispatch(ACTIONS.fetchBrands(data.brands));
+          resolve(data);
+        
+        })
+        
+        
+      }  
+    ).then((data) => {        
+      this.props.dispatch(ACTIONS.loading(false));
+    })
   }
 
   render() {
@@ -34,7 +60,7 @@ export class BrandHome extends Component {
             <div className="brand">
                 <div className="brand-cover" style={{backgroundImage:`url(${brand.images[0].url})`,backgroundSize:'cover'}}>
                         <div className="brand-profile">
-                            <img src={brand.images[1].url} alt={brand.name}/>
+                            <img src={brand.squared_image.url} alt={brand.name}/>
                         </div>
                 </div>
                 <div>
@@ -53,7 +79,7 @@ export class BrandHome extends Component {
           :
             ''            
         }        
-        <Products />
+        <Products token={this.props.match.params.token} />
       </div>
     )
   }

@@ -37,7 +37,6 @@ export class Category extends Component {
             return new Promise(async (resolve, reject) =>{
 
               await this.props.dispatch(ACTIONS.setPagination(page,total,category));
-              //await this.props.dispatch(ACTIONS.setCategory(category));              
               await this.props.dispatch(ACTIONS.fetchBrands(data.brands)); 
               resolve(data);
             
