@@ -51,7 +51,7 @@ export class Category extends Component {
     
     componentDidMount(){
       
-      const category  = this.props.match.params.cat  ? this.props.match.params.cat : 'New'
+      const category  = this.props.match.params.cat  ? this.props.match.params.cat : 'Top Sellers'
       const page      = this.props.match.params.page ? parseInt(this.props.match.params.page) : 1 
   
       this.getCategoryData(category,page);
@@ -60,7 +60,7 @@ export class Category extends Component {
 
     componentDidUpdate(){
         // If no category is received, 'New' is set.
-        const category  = this.props.match.params.cat  ? this.props.match.params.cat : 'New'
+        const category  = this.props.match.params.cat  ? this.props.match.params.cat : 'Top Sellers'
         const page      = this.props.match.params.page ? parseInt(this.props.match.params.page) : 1
         
         if((category !== this.props.pagination.category || page !== this.props.pagination.page) && !this.props.loading){      
